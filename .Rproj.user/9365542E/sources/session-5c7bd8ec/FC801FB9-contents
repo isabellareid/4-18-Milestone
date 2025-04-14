@@ -1,0 +1,4 @@
+if (!require("swirl")) install.packages("swirl", dependencies=T)    #This check if the pkg is installed , o/w it installs the pkg
+library("swirl")                                                    # Load the pkg
+swirl::install_course("Statistical Inference")                  #Get the module
+swirl()   

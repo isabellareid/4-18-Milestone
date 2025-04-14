@@ -1,9 +1,9 @@
 {
     "id": "14DB0D9C",
-    "path": "~/Downloads/DS 201/4-18-Milestone.Rmd",
-    "project_path": null,
+    "path": "~/Documents/GitHub/4-18-Milestone/4-18-Milestone.Rmd",
+    "project_path": "4-18-Milestone.Rmd",
     "type": "r_markdown",
-    "hash": "2819027564",
+    "hash": "3141789467",
     "contents": "",
     "dirty": false,
     "created": 1744649718860.0,
@@ -11,14 +11,16 @@
     "relative_order": 1,
     "properties": {
         "source_window_id": "",
-        "Source": "Source"
+        "Source": "Source",
+        "cursorPosition": "3,18",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1744649827,
+    "lastKnownWriteTime": 1744651671,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1744649827713,
+    "last_content_update": 1744651671496,
     "read_only": false,
     "read_only_alternatives": []
 }
