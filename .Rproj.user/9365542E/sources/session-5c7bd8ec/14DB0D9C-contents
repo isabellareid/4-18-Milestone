@@ -1,0 +1,152 @@
+---
+title: "README"
+output:
+ github_document:
+ pandoc_args: ["--wrap=none"]
+always_allow_html: true
+---
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+```
+```{r}
+str(diamonds)
+```
+```{r}
+ggplot(diamonds, aes(x = x)) + 
+  geom_histogram(binwidth = 0.5) +
+  coord_cartesian(ylim = c(0, 50))
+```
+
+```{r}
+ggplot(diamonds, aes(x = y)) + 
+  geom_histogram(binwidth = 0.5) +
+  coord_cartesian(ylim = c(0, 50))
+```
+
+```{r}
+ggplot(diamonds, aes(x = z)) + 
+  geom_histogram(binwidth = 0.5) +
+  coord_cartesian(ylim = c(0, 50))
+```
+
+**Question 1--10.3.1**
+
+
+The Z variable represents the depth since it shows every value is concentrated below 10. X and Y represent length and width since the concentration of those variables are all higher than the Z variable. However, some of these values that the EDA produced show values of zero. This must be incorrect, since diamonds cannot have a lenegth, width, or depth of 0 mm. 
+
+```{r}
+ggplot(diamonds, aes(x = price)) + 
+  geom_histogram(binwidth = 25) +
+  coord_cartesian(ylim = c(0, 50))
+```
+
+**Question 2--10.3.1**
+
+
+Price is right skewed, with most diamonds clustered under $5,000, with a max of $18,000. Since the binwidths are so small, we are able to see a lot of spikes in the histogram, depicting that the number of diamonds varies a lot depending on the price. These could indicate common prices in certain gaps of prices offered. 
+
+```{r}
+carat1 <- diamonds |> 
+  filter(carat == .99)
+count(carat1)
+
+carat2 <- diamonds |> 
+  filter(carat == 1)
+count(carat2)
+```
+
+**Question 3--10.3.1**
+
+
+There are 23 diamonds in .99 carat and 1,558 diamonds in 1 carat. The cause of the difference could be that the sell price of a 1 carat is so much more than a .99 carat, so they will go the extra .01 to ensure that they can sell the diamonds at a higher price to consumers. 
+
+```{r}
+ggplot(diamonds, aes(x = price)) +
+  geom_histogram() + xlim(0, 5000)
+
+ggplot(diamonds, aes(x = price)) +
+  geom_histogram() + coord_cartesian(xlim = c(0, 5000))
+```
+
+**Question 4--10.3.1**
+
+
+If you leave binwidth unset, then the one without coord_cartesian has smaller binwidths, making it look more varied among prices of the diamond in the dataset. The one with coord_cartesian has wider bins, which shows a more straight-forward depiction of the prices of the diamonds. The second histogram also shows that there are prices higher than $5,000, where as the first one does not. The first one shows more variety in the prices due to the peaks of the bars. If you try and zoom so half a bar is shown, the entire bins in the first histogram may be excluded since the data in that bin is gone whereas for coord_cartesian, it will show a partial bar at the edge. 
+
+
+```{r}
+library(nycflights13)
+library(dplyr)
+```
+
+```{r}
+str(flights)
+```
+
+```{r}
+ggplot(flights, aes(x = dep_delay)) + 
+  geom_histogram()
+
+ggplot(flights, aes(x = carrier)) + 
+  geom_bar()
+```
+
+**Question 1--10.4.1**
+
+
+When there are missing values in a histogram, they are removed from the histogram and R presents a warning sign that says they have been excluded. Although there are no missing values in carrier, if there was, then they would also be dropped from the bar plot. (Essentially they are the same, it just differs since a histogram uses numerical values and bar plots use categorical variables.)
+
+```{r}
+#Example data
+data <-c(1,2,3,NA,5, 6)
+
+mean(data, na.rm = TRUE)
+sum(data, na.rm = TRUE)
+```
+
+**Question 2--10.4.1**
+
+
+When you use the na.rm = TRUE using the mean and sum, then it calculates the mean and the sum of the non-missing values and ignores the NA.
+
+```{r}
+nycflights13::flights |> 
+  mutate(
+    cancelled = is.na(dep_time),
+    sched_hour = sched_dep_time %/% 100,
+    sched_min = sched_dep_time %% 100, 
+    sched_dep_time = sched_hour + (sched_min / 60) 
+  ) |> 
+  ggplot(aes(x = sched_dep_time)) + 
+  geom_freqpoly(aes(color = cancelled), binwidth = 1/4) + 
+  facet_wrap(~ cancelled, scales = "free")
+
+nycflights13::flights |> 
+  mutate(
+    cancelled = is.na(dep_time),
+    sched_hour = sched_dep_time %/% 100,  
+    sched_min = sched_dep_time %% 100, 
+    sched_dep_time = sched_hour + (sched_min / 60) 
+  ) |> 
+  ggplot(aes(x = sched_dep_time)) + 
+  geom_freqpoly(aes(color = cancelled), binwidth = 1/4) + 
+  facet_wrap(~ cancelled, scales = "fixed")
+
+nycflights13::flights |> 
+  mutate(
+    cancelled = is.na(dep_time),
+    sched_hour = sched_dep_time %/% 100, 
+    sched_min = sched_dep_time %% 100, 
+    sched_dep_time = sched_hour + (sched_min / 60)
+  ) |> 
+  ggplot(aes(x = sched_dep_time)) + 
+  geom_freqpoly(aes(color = cancelled), binwidth = 1/4) + 
+  facet_wrap(~ cancelled, scales = "free_y")
+```
+
+**Question 3--10.4.1**
+
+
+The free scale shows two line graphs, but the y-axis is different, depending on how large the y-axis permit for the data. It also just includes the range for the x-axis for the dataset. This can make the data visualization look a bit deceiving. The fixed scale has the same y-axis for both line graphs, making both of them comparable when trying to understand what the data is telling us. The free_y only frees the y-axis, which limits it due to the range.
