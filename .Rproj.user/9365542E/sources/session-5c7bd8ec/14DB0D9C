@@ -3,7 +3,7 @@
     "path": "~/Downloads/DS 201/4-18-Milestone.Rmd",
     "project_path": null,
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "2819027564",
     "contents": "",
     "dirty": false,
     "created": 1744649718860.0,
@@ -14,11 +14,11 @@
         "Source": "Source"
     },
     "folds": "",
-    "lastKnownWriteTime": 1744649344,
+    "lastKnownWriteTime": 1744649827,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1744649344,
+    "last_content_update": 1744649827713,
     "read_only": false,
     "read_only_alternatives": []
 }
